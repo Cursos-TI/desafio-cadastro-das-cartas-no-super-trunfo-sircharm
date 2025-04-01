@@ -14,7 +14,7 @@ int main() {
     char cid01_nome[50];
     char cid01_estado[5];
     char cid01_cod[4];
-    float cid01_area, cid01_pib, cid01_pib_capta, cid01_dens_pop;
+    float cid01_area, cid01_pib, cid01_pib_capta, cid01_dens_pop, cid01_superpoder;
     int cid01_tur;
     unsigned long int cid01_populacao;
 
@@ -22,7 +22,7 @@ int main() {
     char cid02_nome[50];
     char cid02_estado[5];
     char cid02_cod[4];
-    float cid02_area, cid02_pib, cid02_pib_capta, cid02_dens_pop;
+    float cid02_area, cid02_pib, cid02_pib_capta, cid02_dens_pop, cid02_superpoder;
     int cid02_tur;
     unsigned long int cid02_populacao;
     
@@ -48,6 +48,9 @@ int main() {
     //Cálculo da densidade populacional e do PIB per capta da cidade 1
     cid01_dens_pop = (float)cid01_populacao / cid01_area;
     cid01_pib_capta = cid01_pib * 1000000 / (float)cid01_populacao;
+    //Creio que não faz sentido guardar o superpoder em um float sendo que a população pode ser um número enorme
+    //Porém estou fazendo como foi mandado no enunciado
+    cid01_superpoder = cid01_area + cid01_pib + cid01_pib_capta + cid01_populacao + cid01_tur + (cid01_area / (float)cid01_populacao);
 
     //Inserção dos dados da segunda carta pelo usuário
     printf("\nPerfeito, agora já temos a primeira carta!\nInsira o nome da cidade para criar a segunda carta: ");
@@ -67,6 +70,7 @@ int main() {
     //Cálculo da densidade populacional e do PIB per capta da cidade 2
     cid02_dens_pop = (float)cid02_populacao / cid02_area;
     cid02_pib_capta = cid02_pib * 1000000 / (float)cid02_populacao;
+    cid02_superpoder = cid02_area + cid02_pib + cid02_pib_capta + cid02_populacao + cid02_tur + (cid02_area / (float)cid02_populacao);
     
     
     // Exibição dos Dados das Cartas:
@@ -95,7 +99,58 @@ int main() {
     printf("\nPIB: %.2f bilhões de reais", cid02_pib);
     printf("\nPIB per capta: %.2f", cid02_pib_capta);
     printf("\nDensidade populacional: %.2f", cid02_dens_pop);
-    printf("\nNúmero de pontos turísticos: %i\n", cid02_tur);
+    
+    printf("\nNúmero de pontos turísticos: %i\n\n", cid02_tur);
+    //Comparar as cartas e printar os resultados
+    if (cid01_populacao > cid02_populacao)
+    {
+        printf("População: Carta 1 venceu (1)\n");
+    } else {
+        printf("População: Carta 2 venceu (0)\n");
+    }
+    
+    if (cid01_area > cid02_area)
+    {
+        printf("Área: Carta 1 venceu (1)\n");
+    } else {
+        printf("Área: Carta 2 venceu (0)\n");
+    }
+
+    if (cid01_pib > cid02_pib)
+    {
+        printf("PIB: Carta 1 venceu (1)\n");
+    } else {
+        printf("PIB: Carta 2 venceu (0)\n");
+    }
+
+    if (cid01_tur > cid02_tur)
+    {
+        printf("Pontos Turísticos: Carta 1 venceu (1)\n");
+    } else {
+        printf("Pontos Turísticos: Carta 2 venceu (0)\n");
+    }    
+
+    if (cid01_dens_pop < cid02_dens_pop)
+    {
+        printf("Densidade Populacional: Carta 1 venceu (1)\n");
+    } else {
+        printf("Densidade Populacional: Carta 2 venceu (0)\n");
+    } 
+    
+    if (cid01_pib_capta > cid02_pib_capta)
+    {
+        printf("PIB per Capita: Carta 1 venceu (1)\n");
+    } else {
+        printf("PIB per Capita: Carta 2 venceu (0)\n");
+    }  
+
+    if (cid01_superpoder > cid02_superpoder)
+    {
+        printf("Super Poder: Carta 1 venceu (1)\n");
+    } else {
+        printf("Super Poder: Carta 2 venceu (0)\n");
+    } 
+    
 
     return 0;
 }
